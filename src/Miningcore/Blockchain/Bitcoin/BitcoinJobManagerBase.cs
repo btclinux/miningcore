@@ -53,13 +53,18 @@ public abstract class BitcoinJobManagerBase<TJob> : JobManagerBase<TJob>
     protected Network network;
     protected IDestination poolAddressDestination;
 
-    protected virtual object[] GetBlockTemplateParams()
-    {
-        return new object[]
-        {
-            new
-            {
-                rules = new[] {"segwit"},
+    protected virtual object[] GetBlockTemplateParams() {
+        if (extraPoolConfig?.HasMimbleWimble == true) {
+            return new object[] {
+                new {
+                    rules = new[] {"mweb", "segwit"},
+                }
+            };
+        }
+
+        return new object[] {
+            new {
+                    rules = new[] {"segwit"},
             }
         };
     }

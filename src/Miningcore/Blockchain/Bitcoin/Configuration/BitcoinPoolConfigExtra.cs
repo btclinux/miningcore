@@ -38,4 +38,6 @@ public class BitcoinPoolConfigExtra
     /// Custom Arguments for getblocktemplate RPC
     /// </summary>
     public JToken GBTArgs { get; set; }
+
+    public bool HasMimbleWimble { get; set; } = false;
 }
